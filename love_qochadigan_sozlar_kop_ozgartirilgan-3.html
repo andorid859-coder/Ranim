@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Letter — HTML · CSS · JS</title>
+<style>
+:root{
+  --bg:#ff4f9a;
+  --pink:#ff9fcb;
+  --dark:#4a1835;
+  --red:#ff3f87;
+  --cream:#fff5fb;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"Courier New",monospace;
+  background:radial-gradient(circle at 15% 10%,#ffd1e8 0 12%,transparent 30%),radial-gradient(circle at 85% 85%,#ff75b5 0 10%,transparent 32%),linear-gradient(135deg,#ff4f9a,#ffb6d8 48%,#ffd9ea);
+  color:var(--dark);
+  overflow-x:hidden;
+}
+.page{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:18px 12px;
+}
+.badge{
+  color:#ffd2df;
+  background:#1b1225;
+  border:1px solid #5a356d;
+  border-radius:28px;
+  padding:10px 22px;
+  font-weight:bold;
+  box-shadow:0 0 25px #e9365830;
+  z-index:2;
+}
+.badge span{color:#ff7eae}
+.browser{
+  width:min(560px,92vw);
+  margin-top:-2px;
+  border-radius:24px;
+  overflow:hidden;
+  background:var(--cream);
+  box-shadow:0 25px 70px #9b245866,0 0 35px #ffffff55;
+  border:2px solid #ffffffaa;
+}
+.bar{
+  height:48px;
+  background:linear-gradient(90deg,#8f245d,#ff4f9a,#b92b78);
+  color:#aaa;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:0 18px;
+}
+.dot{width:14px;height:14px;border-radius:50%}
+.red{background:#ff5f57}.yellow{background:#ffbd2e}.green{background:#28c840}
+.path{
+  margin-left:18px;
+  font-size:13px;
+  color:#aaa;
+}
+.scene{
+  min-height:650px;
+  padding:48px 34px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 15% 15%,#fff 0 2px,transparent 3px),
+    radial-gradient(circle at 85% 25%,#fff 0 2px,transparent 3px),
+    radial-gradient(circle at 70% 80%,#ff8fc2 0 3px,transparent 4px),
+    linear-gradient(135deg,#ffb6d8,#fff0f8 50%,#ffc7e2);
+}
+.window{
+  width:100%;
+  max-width:475px;
+  margin:auto;
+  border:5px solid #ff5a9d;
+  border-radius:18px;
+  background:rgba(255,255,255,.72);
+  overflow:hidden;
+  box-shadow:0 15px 35px #d92f7a55, inset 0 0 30px #ffffff66;
+}
+.titlebar{
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 14px;
+  background:linear-gradient(90deg,#ff9fca,#ff6eae);
+  border-bottom:4px solid #ff5a9d;
+  font-weight:bold;
+  font-size:20px;
+}
+.controls{display:flex;gap:8px}
+.controls button{
+  width:30px;height:28px;
+  border:2px solid #d99aa7;
+  background:#fff5fa;
+  color:#75414b;
+  border-radius:4px;
+}
+.icons{
+  padding:13px;
+  color:#e93658;
+  font-size:24px;
+  letter-spacing:8px;
+  border-bottom:4px solid #ff5a9d;
+}
+.content{
+  min-height:390px;
+  padding:25px 18px;
+  background:
+    linear-gradient(45deg,#f5b9cb 25%,transparent 25%,transparent 75%,#f5b9cb 75%),
+    linear-gradient(45deg,#f5b9cb 25%,transparent 25%,transparent 75%,#f5b9cb 75%);
+  background-size:26px 26px;
+  background-position:0 0,13px 13px;
+  background-color:#ffd1e6;
+}
+h1{
+  margin:0 0 14px;
+  font-size:24px;
+}
+.cat{
+  font-size:80px;
+  line-height:1;
+  margin:10px 0 18px;
+  filter:drop-shadow(4px 5px 0 #fff);
+}
+.heart{color:#e93658;font-size:30px}
+.message{
+  font-family:"Courier New",monospace;
+  font-weight:bold;
+  font-size:15px;
+  line-height:1.6;
+  margin:18px auto;
+  max-width:390px;
+}
+.highlight{
+  background:#6da5dc;
+  color:white;
+  padding:2px 4px;
+  border-radius:2px;
+}
+.actions{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  margin-top:18px;
+}
+.actions button{
+  border:3px solid #d97b88;
+  border-radius:12px;
+  padding:10px 22px;
+  background:linear-gradient(135deg,#fff,#ffe0ee);
+  font:700 16px "Courier New",monospace;
+  cursor:pointer;
+}
+.actions button:hover{transform:scale(1.05)}
+.code-row{
+  width:min(900px,96vw);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:22px;
+}
+.code{
+  min-height:220px;
+  padding:16px;
+  border:1px solid #392542;
+  border-radius:14px;
+  background:#120c19;
+  color:#ddd;
+  box-shadow:0 10px 30px #0005;
+  overflow:auto;
+}
+.code h3{margin:0 0 12px;color:#ff9ab8}
+.code pre{
+  margin:0;
+  white-space:pre-wrap;
+  font:12px/1.5 "Courier New",monospace;
+}
+.love-overlay{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(20,8,30,.72);
+  backdrop-filter:blur(12px);
+  z-index:100;
+  animation:fadeIn .35s ease;
+}
+
+.love-popup{
+  width:min(360px,86vw);
+  padding:34px 24px;
+  text-align:center;
+  border:2px solid #f3a8bd;
+  border-radius:28px;
+  background:linear-gradient(145deg,#fff8fb,#ffdce8);
+  box-shadow:0 25px 80px #0008,0 0 40px #ff8eae66;
+  animation:popIn .45s cubic-bezier(.2,1.4,.4,1);
+}
+
+.big-heart{
+  font-size:75px;
+  color:#e93658;
+  animation:pulse 1s infinite;
+}
+
+.love-popup h2{
+  margin:5px 0 10px;
+  font-size:30px;
+  color:#8b3048;
+}
+
+.love-popup p{
+  font-weight:bold;
+  line-height:1.6;
+  color:#633743;
+}
+
+.sparkles{
+  margin:18px 0;
+  color:#e93658;
+  font-size:24px;
+  letter-spacing:5px;
+}
+
+#closeLove{
+  border:0;
+  border-radius:15px;
+  padding:12px 30px;
+  background:#e93658;
+  color:white;
+  font:bold 16px "Courier New",monospace;
+  cursor:pointer;
+  box-shadow:0 8px 20px #e936584d;
+}
+
+#closeLove:hover{
+  transform:scale(1.06);
+}
+
+@keyframes fadeIn{
+  from{opacity:0} to{opacity:1}
+}
+
+@keyframes popIn{
+  from{transform:scale(.65) translateY(20px);opacity:0}
+  to{transform:scale(1) translateY(0);opacity:1}
+}
+
+@keyframes pulse{
+  50%{transform:scale(1.12)}
+}
+
+.fall{
+  position:fixed;
+  top:-30px;
+  pointer-events:none;
+  animation:fall linear forwards;
+  z-index:10;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);opacity:.15}
+}
+@media(max-width:700px){
+  .scene{padding:28px 12px}
+  .code-row{grid-template-columns:1fr}
+  .code{min-height:170px}
+}
+
+/* Extra funny effects */
+.funny-toast{
+  position:fixed;left:50%;top:12%;transform:translateX(-50%) scale(.7);
+  z-index:300;background:#fff8fb;border:3px solid #e93658;
+  border-radius:20px;padding:12px 18px;font:bold 15px "Courier New",monospace;
+  box-shadow:0 12px 35px #0006;opacity:0;pointer-events:none;
+}
+.funny-toast.show{animation:toastPop 1.8s ease forwards}
+@keyframes toastPop{
+  0%{opacity:0;transform:translateX(-50%) scale(.7) rotate(-4deg)}
+  15%,75%{opacity:1;transform:translateX(-50%) scale(1) rotate(0)}
+  100%{opacity:0;transform:translateX(-50%) scale(.8) rotate(4deg)}
+}
+.shake{animation:shake .35s ease}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}
+  50%{transform:translateX(7px)}75%{transform:translateX(-4px)}
+}
+
+
+/* Pink candy-glass style */
+body::before,body::after{
+  content:"♡";
+  position:fixed;
+  font-size:120px;
+  color:#ffffff30;
+  pointer-events:none;
+  z-index:0;
+}
+body::before{left:-25px;top:18%;transform:rotate(-18deg)}
+body::after{right:-25px;bottom:8%;transform:rotate(18deg)}
+.actions button{
+  box-shadow:0 8px 18px #c62d7055;
+  transition:.2s;
+}
+.actions button:first-child{
+  background:linear-gradient(135deg,#ff4f9a,#ff8ec2);
+  color:white;
+  border-color:#ff3f87;
+}
+.actions button:hover{transform:translateY(-3px) scale(1.07);box-shadow:0 12px 24px #c62d7066}
+
+</style>
+</head>
+<body>
+<div class="page">
+<div class="browser">
+    <div class="bar">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+      <div class="path">localhost / love</div>
+    </div>
+
+    <div class="scene">
+      <section class="window">
+        <header class="titlebar">
+          <span>LOVE</span>
+          <div class="controls">
+            <button>−</button><button>□</button><button>×</button>
+          </div>
+        </header>
+
+        <div class="icons">♥ · ♥ · ♥</div>
+
+        <div class="content">
+          <h1 id="title">Ranim , Ovqat qilib ber!💞😂</h1>
+          <div class="heart">♥</div>
+
+          <!-- CSS/emoji pixel-cat -->
+          <div class="cat" aria-label="cute cat">ฅ^•ﻌ•^ฅ</div>
+
+          <p class="message">
+            Every month of my life, <span class="highlight">a lifetime</span>
+            to go. Happy and necessary, my love ♥
+          </p>
+
+          <div class="actions">
+            <button id="yesBtn">YES ♥</button>
+            <button id="noBtn">NO</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<script>
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+const title=document.getElementById("title");
+
+const noMessages = [
+  "Aniqmi? 😳","Iyy 😂","Rostdanmi? 🥹","Yo‘qmi? 😭",
+  "O‘ylab ko‘r 😏","Voyyy 😂","Nega NO? 🥺","Ishonching komilmi? 👀",
+  "Yana NO? 😭","Bo‘lmaydi-ku 😂","Eeee 😭💞","Bitta YES bosib ko‘r 😌",
+  "Qochdim 😂","Meni xafa qilma 🥹","Hali ham NO? 😳",
+  "Iyy, yana bosdi 😂","NO tugmasi charchadi 😭","Mayli, yana qochaman 😎",
+  "Shoshmaaa 😂💞","Oxirgi imkoniyat... 🥹","Hali taslim bo‘lmadim 😏",
+  "Yana urinib ko‘r 😜","Menimcha YES kerak ❤️",
+  "Ushlay olsang ushla 😂🏃","Yo‘q, men tayyor emasman 😭",
+  "NO bugun ta’tilga chiqdi 🏖️😂","Voy, yana kelyapti! 😳",
+  "Meni tutolmaysan 😎","Qani, yana urin 😂","Men tez yuguraman 🏃💨",
+  "NO: bye-bye 👋😂","Telefon ham kuldi 🤣📱","Ehtiyot bo‘l, qochaman! 😜",
+  "Bu tugma juda ayyor 😂","Yana qochdim! 🏃‍♂️💨","Menga yetolmaysan 😎💞",
+  "NO deyish oson emas 😂","Tugma joyida turolmaydi 😭",
+  "Qoch-qoch o‘yini boshlandi 🎮😂","Menimcha, YES bosishing kerak 😏",
+  "NO tugmasi seni sinayapti 👀","Hali ko‘p qochaman 😂",
+  "Bir marta YES qilib ko‘r 💗","Aaa, yana NO! 😭😂",
+  "Qochdim, tut-chi 😜","Bu tugmani ushlash qiyin 😂",
+  "Meni bosishga urinma 😳","NO: mission impossible 🤣",
+  "Yurak YES deyapti ❤️","Qochishga tayyorman 🏃😂",
+  "Endi qayerga qochay? 😭","Maymuncha ham kulmoqda 🐒😂",
+  "NO tugmasi professional qochuvchi 😎","Hali taslim emasman! 💪😂",
+  "YES kutib turibdi 👀💞","Yana bir NO? Voyyy 😂",
+  "Meni quvmaaa 😭🏃","Qochish rejimi: ON 🔥😂",
+  "NO teleportatsiya qildi 🌀","Ushla meni 😜💨",
+  "Bu oxirgisi emas 😂","NO qaytib keldi! 😱",
+  "Qani, tutib ko‘r 😎","Men seni chalg‘ityapman 😂",
+  "YES tomon yuramizmi? 💞","NO bugun juda sho‘x 😂",
+  "Tugma: men qochaman, sen quvasan 🏃😂","Hali ham NO deysanmi? 🥹",
+  "Meni joyimda ushlab bo‘lmaydi 😎","Qochdim-qochdim 😂💨",
+  "Bu tugma tirik shekilli 😭","NO mode: TURBO 🚀😂",
+  "Bir kun meni ushlarsan 😂","Hozircha xayr 👋😜"
+];
+
+const funnyTexts = [
+  "🚨 DIQQAT: NO tugmasi qochib ketdi!",
+  "😂 Bu tugma seni aldamoqchi edi!",
+  "🐒 Maymuncha nazoratni o‘z qo‘liga oldi!",
+  "💞 YES tugmasi: meni bosss 😭",
+  "📢 Admin aytdi: NO taqiqlangan 😂",
+  "🫣 Tugma uyalyapti, tegma!",
+  "🏃‍♂️ NO: men bu yerdan ketaman!",
+  "🤣 Sistema: romantika darajasi 999%",
+  "💻 Kompyuter ham kulib yubordi 😂",
+  "🐱 Mushukcha YES tarafida!",
+  "😎 NO tugmasi bugun juda chaqqon!",
+  "💗 Yuraklar ishga tushdi!"
+];
+
+let noCount=0;
+
+function toast(text){
+  let t=document.querySelector(".funny-toast");
+  if(!t){
+    t=document.createElement("div");
+    t.className="funny-toast";
+    document.body.appendChild(t);
+  }
+  t.textContent=text;
+  t.classList.remove("show");
+  void t.offsetWidth;
+  t.classList.add("show");
+}
+
+function dodge(){
+  noBtn.textContent=noMessages[noCount % noMessages.length];
+  noCount++;
+
+  noBtn.style.position="fixed";
+  const x=8+Math.random()*76;
+  const y=18+Math.random()*65;
+  noBtn.style.left=x+"%";
+  noBtn.style.top=y+"%";
+
+  document.querySelector(".content").classList.add("shake");
+  setTimeout(()=>document.querySelector(".content").classList.remove("shake"),350);
+
+  if(noCount % 2 === 0){
+    toast(funnyTexts[Math.floor(Math.random()*funnyTexts.length)]);
+  }
+}
+
+noBtn.addEventListener("mouseenter",dodge);
+noBtn.addEventListener("click",dodge);
+noBtn.addEventListener("touchstart",dodge);
+
+yesBtn.addEventListener("click",()=>{
+  title.textContent="malades maymuncham muax💋😂";
+  rainHearts();
+  toast("🎉 YES BOSILDI! NO tugmasi yig‘layapti 😂");
+
+  const overlay=document.createElement("div");
+  overlay.className="love-overlay";
+  overlay.innerHTML=`
+    <div class="love-popup">
+      <div class="big-heart">♥</div>
+      <h2>Yayyy! 💖😂</h2>
+      <p>🏆 YES YUTDI! 😂💞</p>
+      <p style="font-size:22px">malades maymuncham muax💋😂</p>
+      <div class="sparkles">✦ ✧ ♥ 🐒 ♥ ✧ ✦</div>
+      
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  document.getElementById("closeLove").addEventListener("click",()=>{
+    overlay.remove();
+    toast("😎 Yana bir bor bosasanmi? 😂");
+  });
+});
+
+function rainHearts(){
+  for(let i=0;i<65;i++){
+    setTimeout(()=>{
+      const h=document.createElement("div");
+      h.className="fall";
+      h.textContent=["♥","♡","💗","💖","😂","🐒","✨"][Math.floor(Math.random()*7)];
+      h.style.left=Math.random()*100+"vw";
+      h.style.fontSize=14+Math.random()*30+"px";
+      h.style.animationDuration=2+Math.random()*3+"s";
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),5500);
+    },i*55);
+  }
+}
+
+/* Random funny messages while the page is open */
+setInterval(()=>{
+  if(Math.random()<0.35) toast(funnyTexts[Math.floor(Math.random()*funnyTexts.length)]);
+},7000);
+</script>
+</body>
+</html>
